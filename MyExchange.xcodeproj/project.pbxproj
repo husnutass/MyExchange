@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BC41F7692798B79200C0ECB1 /* ExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC41F7682798B79200C0ECB1 /* ExchangeRates.swift */; };
+		BC41F76B2798C58500C0ECB1 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC41F76A2798C58500C0ECB1 /* ServiceProvider.swift */; };
+		BC41F76D2798CDB500C0ECB1 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC41F76C2798CDB500C0ECB1 /* APIManager.swift */; };
 		BC4BA866279412F70074E7E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4BA865279412F70074E7E3 /* AppDelegate.swift */; };
 		BC4BA868279412F70074E7E3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4BA867279412F70074E7E3 /* SceneDelegate.swift */; };
 		BC4BA86F279412F90074E7E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC4BA86E279412F90074E7E3 /* Assets.xcassets */; };
@@ -21,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		BC41F7682798B79200C0ECB1 /* ExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRates.swift; sourceTree = "<group>"; };
+		BC41F76A2798C58500C0ECB1 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
+		BC41F76C2798CDB500C0ECB1 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		BC4BA862279412F70074E7E3 /* MyExchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyExchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC4BA865279412F70074E7E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC4BA867279412F70074E7E3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +52,8 @@
 		BC41F7672798B22600C0ECB1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				BC41F76A2798C58500C0ECB1 /* ServiceProvider.swift */,
+				BC41F76C2798CDB500C0ECB1 /* APIManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -199,7 +205,9 @@
 			files = (
 				BC831150279747B3004E965B /* UIView+Extension.swift in Sources */,
 				BC831147279742B0004E965B /* MainViewController.swift in Sources */,
+				BC41F76D2798CDB500C0ECB1 /* APIManager.swift in Sources */,
 				BC4BA866279412F70074E7E3 /* AppDelegate.swift in Sources */,
+				BC41F76B2798C58500C0ECB1 /* ServiceProvider.swift in Sources */,
 				BC83115427974CD6004E965B /* MainTableViewCell.swift in Sources */,
 				BC41F7692798B79200C0ECB1 /* ExchangeRates.swift in Sources */,
 				BC4BA868279412F70074E7E3 /* SceneDelegate.swift in Sources */,
