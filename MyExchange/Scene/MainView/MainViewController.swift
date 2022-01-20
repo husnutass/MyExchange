@@ -19,10 +19,9 @@ class MainViewController: UIViewController {
     private var mainTableView = UITableView()
     
     private lazy var mainStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [basePickerView, mainTableView])
+        let view = UIStackView(arrangedSubviews: [basePickerView, activityIndicatorView, mainTableView])
         view.axis = .vertical
         view.alignment = .fill
-        view.spacing = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -54,19 +53,27 @@ class MainViewController: UIViewController {
         configureView()
     }
     
+    // MARK: - UI Configurations
     private func addComponents() {
+        view.addSubview(mainStackView)
+    }
+    
+    private func configureTableView() {
         mainTableView.translatesAutoresizingMaskIntoConstraints = false
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.identifier)
-        view.addSubview(mainStackView)
     }
     
     private func configureView() {
+        configureTableView()
         mainStackView.expandViewWithSafeArea(to: view)
+        activityIndicatorView.centerXAnchor.constraint(equalTo: mainStackView.centerXAnchor).isActive = true
     }
     
+    // MARK: - Data Handling
     private func fetchData() {
+        activityIndicatorView.startAnimating()
         viewModel.fetchExchangeRates(with: baseAsset, completion: exchangeRatesHandler)
     }
     
@@ -75,11 +82,13 @@ class MainViewController: UIViewController {
             guard let response = response else { return }
             self?.exchangeRates = response.rates
             self?.mainTableView.reloadData()
+            self?.activityIndicatorView.stopAnimating()
         }
     }
     
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return exchangeRates.count
@@ -92,6 +101,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

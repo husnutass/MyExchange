@@ -60,9 +60,13 @@ class MainTableViewCell: UITableViewCell {
         mainStackView.expandView(to: containerView)
     }
     
+    private func roundDouble(number: Double) -> Double {
+        return (number * 10000).rounded() / 10000
+    }
+    
     func setData(cellData: Rate) {
         nameLabel.text = cellData.assetIDQuote
-        rateLabel.text = String(cellData.rate)
+        rateLabel.text = String(roundDouble(number: cellData.rate))
     }
     
 
