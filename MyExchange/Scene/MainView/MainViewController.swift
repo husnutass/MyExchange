@@ -7,8 +7,6 @@
 
 import UIKit
 
-typealias ExchangeRatesCompletionBlock = (ExchangeRatesResponse?) -> ()
-
 class MainViewController: UIViewController {
     
     private var viewModel: MainViewModel!

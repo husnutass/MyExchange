@@ -7,6 +7,7 @@
 
 import Foundation
 
+typealias ExchangeRatesCompletionBlock = (ExchangeRatesResponse?) -> ()
 
 class MainViewModel {
     
@@ -16,7 +17,7 @@ class MainViewModel {
         self.serviceProvider = serviceProvider
     }
     
-    func fetchExchangeRates(with baseAsset: BaseAsset, completion: @escaping (ExchangeRatesResponse?) -> ()) {
+    func fetchExchangeRates(with baseAsset: BaseAsset, completion: @escaping ExchangeRatesCompletionBlock) {
         let url = serviceProvider.getExchangeRatesUrl(baseAsset: baseAsset)
         APIManager.shared.fetchData(url: url, completion: completion)
     }
