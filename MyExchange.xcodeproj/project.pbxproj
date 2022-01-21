@@ -77,14 +77,13 @@
 		BC4BA864279412F70074E7E3 /* MyExchange */ = {
 			isa = PBXGroup;
 			children = (
+				BCF52982279A2FB3009C4923 /* App */,
+				BC83114427974284004E965B /* Scene */,
+				BC83114C2797456B004E965B /* Model */,
 				BC41F7672798B22600C0ECB1 /* Service */,
 				BC83114D27974791004E965B /* Utils */,
-				BC83114C2797456B004E965B /* Model */,
-				BC83114427974284004E965B /* Scene */,
-				BC4BA865279412F70074E7E3 /* AppDelegate.swift */,
-				BC4BA867279412F70074E7E3 /* SceneDelegate.swift */,
-				BC4BA86E279412F90074E7E3 /* Assets.xcassets */,
-				BC4BA870279412F90074E7E3 /* LaunchScreen.storyboard */,
+				BCF52983279A3000009C4923 /* Resources */,
+				BCF52984279A3006009C4923 /* Supporting Files */,
 				BC4BA873279412F90074E7E3 /* Info.plist */,
 			);
 			path = MyExchange;
@@ -102,8 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				BC831146279742B0004E965B /* MainViewController.swift */,
-				BC83115327974CD5004E965B /* MainTableViewCell.swift */,
 				BC831148279743CF004E965B /* MainViewModel.swift */,
+				BC83115327974CD5004E965B /* MainTableViewCell.swift */,
 				BC83114A279743E3004E965B /* MainViewBuilder.swift */,
 			);
 			path = MainView;
@@ -131,6 +130,31 @@
 				BC83114F279747B3004E965B /* UIView+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BCF52982279A2FB3009C4923 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				BC4BA865279412F70074E7E3 /* AppDelegate.swift */,
+				BC4BA867279412F70074E7E3 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		BCF52983279A3000009C4923 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BC4BA86E279412F90074E7E3 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BCF52984279A3006009C4923 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BC4BA870279412F90074E7E3 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
