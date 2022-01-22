@@ -26,9 +26,9 @@
 - Fits perfect small or big device sizes
 
 ## Previews
-| Main View |
-| --- |
-| ![Preview](assets/myExchange.gif) |
+| Main View | Error Alert | Light Mode |
+| --- | --- | --- |
+| ![Preview](assets/myExchange.gif) | ![Preview](assets/error.png) | ![Preview](assets/light.png) |
 
 
 ## License
