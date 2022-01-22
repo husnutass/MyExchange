@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias ExchangeRatesCompletionBlock = (ExchangeRatesResponse?) -> ()
+typealias ExchangeRatesCompletionBlock = (Result<ExchangeRatesResponse?, Error>) -> ()
 
 class MainViewModel {
     

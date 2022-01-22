@@ -77,8 +77,14 @@ class MainViewController: UIViewController {
     
     lazy var exchangeRatesHandler: ExchangeRatesCompletionBlock = { [weak self] response in
         DispatchQueue.main.async {
-            guard let response = response else { return }
-            self?.exchangeRates = response.rates
+            switch response {
+            case .success(let data):
+                guard let data = data else { return }
+                self?.exchangeRates = data.rates
+            case .failure(let error):
+                let errorResponse = error as? ErrorResponse
+                self?.showAlert(title: "Error", message: errorResponse?.errorMessage)
+            }
             self?.mainTableView.reloadData()
             self?.activityIndicatorView.stopAnimating()
         }

@@ -13,17 +13,30 @@ class APIManager {
     
     private init() {}
     
-    func fetchData<R: Decodable>(url: URL, completion: @escaping (R?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
-            if error != nil {
-                print(String(describing: error))
-                completion(nil)
+    func fetchData<R: Decodable>(url: URL, completion: @escaping (Result<R?, Error>) -> ()) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                // Server error
+                let errorResponse = ErrorResponse(errorMessage: error.localizedDescription, errorCode: error._code, errorType: .serverError)
+                completion(.failure(errorResponse))
             } else {
-                guard let data = data, let result = try? JSONDecoder().decode(R.self, from: data) else { completion(nil); return }
-                completion(result)
+                do {
+                    guard let data = data else {
+                        // No data
+                        let errorResponse = ErrorResponse(errorMessage: error?.localizedDescription, errorCode: 404, errorType: .missingData)
+                        completion(.failure(errorResponse))
+                        return
+                    }
+                    let result = try JSONDecoder().decode(R.self, from: data)
+                    // Success
+                    completion(.success(result))
+                } catch let error {
+                    // Decoding error
+                    let errorResponse = ErrorResponse(errorMessage: error.localizedDescription, errorCode: error._code, errorType: .decodingError)
+                    completion(.failure(errorResponse))
+                }
             }
-        }).resume()
+        }.resume()
     }
-    
     
 }
