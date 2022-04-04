@@ -22,6 +22,7 @@
 		BCAB2A37279CAC1C00731492 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAB2A36279CAC1B00731492 /* UIViewController+Extension.swift */; };
 		BCAB2A39279CACA900731492 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAB2A38279CACA900731492 /* ErrorResponse.swift */; };
 		BCAB2A3B279CACCA00731492 /* ErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAB2A3A279CACCA00731492 /* ErrorType.swift */; };
+		BCCF0DD027FB80DF00A36B59 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF0DCF27FB80DF00A36B59 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		BCAB2A36279CAC1B00731492 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		BCAB2A38279CACA900731492 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		BCAB2A3A279CACCA00731492 /* ErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorType.swift; sourceTree = "<group>"; };
+		BCCF0DCF27FB80DF00A36B59 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		BC4BA864279412F70074E7E3 /* MyExchange */ = {
 			isa = PBXGroup;
 			children = (
+				BCCF0DCD27FB802600A36B59 /* ViewComponents */,
 				BCF52982279A2FB3009C4923 /* App */,
 				BC83114427974284004E965B /* Scene */,
 				BC83114C2797456B004E965B /* Model */,
@@ -100,20 +103,19 @@
 		BC83114427974284004E965B /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				BC83114527974296004E965B /* MainView */,
+				BC83114527974296004E965B /* Main */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
 		};
-		BC83114527974296004E965B /* MainView */ = {
+		BC83114527974296004E965B /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				BC831146279742B0004E965B /* MainViewController.swift */,
 				BC831148279743CF004E965B /* MainViewModel.swift */,
-				BC83115327974CD5004E965B /* MainTableViewCell.swift */,
 				BC83114A279743E3004E965B /* MainViewBuilder.swift */,
 			);
-			path = MainView;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		BC83114C2797456B004E965B /* Model */ = {
@@ -139,6 +141,31 @@
 				BCAB2A36279CAC1B00731492 /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BCCF0DCD27FB802600A36B59 /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				BCCF0DD127FB83A800A36B59 /* ActivityIndicator */,
+				BCCF0DCE27FB80B100A36B59 /* MainView */,
+			);
+			path = ViewComponents;
+			sourceTree = "<group>";
+		};
+		BCCF0DCE27FB80B100A36B59 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				BCCF0DCF27FB80DF00A36B59 /* MainView.swift */,
+				BC83115327974CD5004E965B /* MainTableViewCell.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		BCCF0DD127FB83A800A36B59 /* ActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ActivityIndicator;
 			sourceTree = "<group>";
 		};
 		BCF52982279A2FB3009C4923 /* App */ = {
@@ -237,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC831150279747B3004E965B /* UIView+Extension.swift in Sources */,
+				BCCF0DD027FB80DF00A36B59 /* MainView.swift in Sources */,
 				BCAB2A3B279CACCA00731492 /* ErrorType.swift in Sources */,
 				BCAB2A37279CAC1C00731492 /* UIViewController+Extension.swift in Sources */,
 				BC831147279742B0004E965B /* MainViewController.swift in Sources */,

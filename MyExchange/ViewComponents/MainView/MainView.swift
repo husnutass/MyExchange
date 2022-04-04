@@ -1,21 +1,18 @@
 //
-//  MainViewController.swift
+//  MainView.swift
 //  MyExchange
 //
-//  Created by Hüsnü Taş on 18.01.2022.
+//  Created by Hüsnü Taş on 4.04.2022.
 //
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainView: UIView {
     
-    private var viewModel: MainViewModel!
-    
-    private var exchangeRates = [Rate]()
-    private var baseAsset: BaseAsset = .usd
+    weak var delegate: MainViewController?
     
     private var mainTableView = UITableView()
-    
+
     private lazy var mainStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [basePickerView, activityIndicatorView, mainTableView])
         view.axis = .vertical
@@ -26,6 +23,7 @@ class MainViewController: UIViewController {
     
     private lazy var basePickerView: UIPickerView = {
         let picker = UIPickerView()
+        picker.translatesAutoresizingMaskIntoConstraints = false
         picker.delegate = self
         picker.dataSource = self
         picker.userActivity?.title = "Base"
@@ -35,25 +33,29 @@ class MainViewController: UIViewController {
     
     private lazy var activityIndicatorView: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
         return indicator
     }()
     
-    convenience init(viewModel: MainViewModel) {
-        self.init()
-        self.viewModel = viewModel
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addComponents()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        fetchData()
-        addComponents()
-        configureView()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - UI Configurations
     private func addComponents() {
-        view.addSubview(mainStackView)
+        addSubview(mainStackView)
+        configureView()
+    }
+    
+    private func configureView() {
+        configureTableView()
+        mainStackView.expandView(to: self)
+        activityIndicatorView.centerXAnchor.constraint(equalTo: mainStackView.centerXAnchor).isActive = true
     }
     
     private func configureTableView() {
@@ -63,50 +65,31 @@ class MainViewController: UIViewController {
         mainTableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.identifier)
     }
     
-    private func configureView() {
-        configureTableView()
-        mainStackView.expandViewWithSafeArea(to: view)
-        activityIndicatorView.centerXAnchor.constraint(equalTo: mainStackView.centerXAnchor).isActive = true
-    }
-    
-    // MARK: - Data Handling
-    private func fetchData() {
+    func startAnimating() {
         activityIndicatorView.startAnimating()
-        viewModel.fetchExchangeRates(with: baseAsset, completion: exchangeRatesHandler)
     }
     
-    lazy var exchangeRatesHandler: ExchangeRatesCompletionBlock = { [weak self] response in
-        DispatchQueue.main.async {
-            switch response {
-            case .success(let data):
-                guard let data = data else { return }
-                self?.exchangeRates = data.rates
-            case .failure(let error):
-                let errorResponse = error as? ErrorResponse
-                self?.showAlert(title: "Error", message: errorResponse?.errorMessage)
-            }
-            self?.mainTableView.reloadData()
-            self?.activityIndicatorView.stopAnimating()
-        }
+    func stopAnimating() {
+        activityIndicatorView.stopAnimating()
     }
-    
+
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+extension MainView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exchangeRates.count
+        return delegate?.exchangeRates.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier) as? MainTableViewCell else { return UITableViewCell() }
-        cell.setData(cellData: exchangeRates[indexPath.row])
+        cell.setData(cellData: delegate?.exchangeRates[indexPath.row])
         return cell
     }
 }
 
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
-extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension MainView: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -120,7 +103,7 @@ extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        baseAsset = BaseAsset.allCases[row]
-        fetchData()
+        delegate?.baseAsset = BaseAsset.allCases[row]
+        delegate?.fetchData()
     }
 }

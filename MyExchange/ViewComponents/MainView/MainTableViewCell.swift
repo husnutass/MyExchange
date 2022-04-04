@@ -64,7 +64,8 @@ class MainTableViewCell: UITableViewCell {
         return (number * 10000).rounded() / 10000
     }
     
-    func setData(cellData: Rate) {
+    func setData(cellData: Rate?) {
+        guard let cellData = cellData else { return }
         nameLabel.text = cellData.assetIDQuote
         rateLabel.text = String(roundDouble(number: cellData.rate))
     }
