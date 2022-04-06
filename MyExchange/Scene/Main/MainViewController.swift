@@ -61,6 +61,7 @@ class MainViewController: UIViewController {
     
 }
 
+// MARK: - MainViewDataProtocol
 extension MainViewController: MainViewDataProtocol {
     func getNumberOfRowsInSection() -> Int {
         return viewModel.exchangeRates.count

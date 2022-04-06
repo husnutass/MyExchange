@@ -26,6 +26,7 @@ class MainViewModel {
         APIManager.shared.fetchData(url: url, completion: exchangeRatesHandler)
     }
     
+    // MARK: - Data Handling
     lazy var exchangeRatesHandler: ExchangeRatesCompletionBlock = { [weak self] response in
         DispatchQueue.main.async {
             switch response {
@@ -41,6 +42,7 @@ class MainViewModel {
         }
     }
     
+    // MARK: - Data Subscription
     func subscribeExchangeRates(completion: @escaping ExchangeRatesResponseBlock) {
         exchangeRatesCompletion = completion
     }
