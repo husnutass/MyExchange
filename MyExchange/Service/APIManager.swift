@@ -13,7 +13,7 @@ class APIManager {
     
     private init() {}
     
-    func fetchData<R: Decodable>(url: URL, completion: @escaping (Result<R?, Error>) -> ()) {
+    func fetchData<R: Decodable>(url: URL, completion: @escaping (Result<R?, ErrorResponse>) -> ()) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 // Server error

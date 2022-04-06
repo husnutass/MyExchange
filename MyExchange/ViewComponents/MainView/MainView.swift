@@ -9,7 +9,7 @@ import UIKit
 
 class MainView: UIView {
     
-    weak var delegate: MainViewController?
+    var delegate: MainViewDataProtocol?
     
     private var mainTableView = UITableView()
 
@@ -72,18 +72,23 @@ class MainView: UIView {
     func stopAnimating() {
         activityIndicatorView.stopAnimating()
     }
+    
+    func reloadData() {
+        mainTableView.reloadData()
+        stopAnimating()
+    }
 
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension MainView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return delegate?.exchangeRates.count ?? 0
+        return delegate?.getNumberOfRowsInSection() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier) as? MainTableViewCell else { return UITableViewCell() }
-        cell.setData(cellData: delegate?.exchangeRates[indexPath.row])
+        cell.setData(cellData: delegate?.getCellData(at: indexPath.row))
         return cell
     }
 }
@@ -103,7 +108,6 @@ extension MainView: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        delegate?.baseAsset = BaseAsset.allCases[row]
-        delegate?.fetchData()
+        delegate?.selectBaseAsset(at: row)
     }
 }

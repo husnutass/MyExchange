@@ -23,6 +23,7 @@
 		BCAB2A39279CACA900731492 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAB2A38279CACA900731492 /* ErrorResponse.swift */; };
 		BCAB2A3B279CACCA00731492 /* ErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAB2A3A279CACCA00731492 /* ErrorType.swift */; };
 		BCCF0DD027FB80DF00A36B59 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF0DCF27FB80DF00A36B59 /* MainView.swift */; };
+		BCCF0DD427FE361F00A36B59 /* MainViewDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCF0DD327FE361F00A36B59 /* MainViewDataProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		BCAB2A38279CACA900731492 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		BCAB2A3A279CACCA00731492 /* ErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorType.swift; sourceTree = "<group>"; };
 		BCCF0DCF27FB80DF00A36B59 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		BCCF0DD327FE361F00A36B59 /* MainViewDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDataProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,8 +89,8 @@
 		BC4BA864279412F70074E7E3 /* MyExchange */ = {
 			isa = PBXGroup;
 			children = (
-				BCCF0DCD27FB802600A36B59 /* ViewComponents */,
 				BCF52982279A2FB3009C4923 /* App */,
+				BCCF0DCD27FB802600A36B59 /* ViewComponents */,
 				BC83114427974284004E965B /* Scene */,
 				BC83114C2797456B004E965B /* Model */,
 				BC41F7672798B22600C0ECB1 /* Service */,
@@ -129,6 +131,7 @@
 		BC83114D27974791004E965B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BCCF0DD227FE360C00A36B59 /* Protocols */,
 				BC83114E27974795004E965B /* Extensions */,
 			);
 			path = Utils;
@@ -166,6 +169,14 @@
 			children = (
 			);
 			path = ActivityIndicator;
+			sourceTree = "<group>";
+		};
+		BCCF0DD227FE360C00A36B59 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				BCCF0DD327FE361F00A36B59 /* MainViewDataProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		BCF52982279A2FB3009C4923 /* App */ = {
@@ -277,6 +288,7 @@
 				BC4BA868279412F70074E7E3 /* SceneDelegate.swift in Sources */,
 				BC83114B279743E3004E965B /* MainViewBuilder.swift in Sources */,
 				BC831149279743CF004E965B /* MainViewModel.swift in Sources */,
+				BCCF0DD427FE361F00A36B59 /* MainViewDataProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

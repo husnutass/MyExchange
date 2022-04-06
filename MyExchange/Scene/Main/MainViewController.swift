@@ -11,11 +11,6 @@ class MainViewController: UIViewController {
     
     private var viewModel: MainViewModel!
     
-    var exchangeRates = [Rate]()
-    var baseAsset: BaseAsset = .usd
-    
-    private var mainTableView = UITableView()
-    
     private lazy var mainView: MainView = {
         let view = MainView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -31,6 +26,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        subscribeData()
         fetchData()
         addComponents()
         configureView()
@@ -46,24 +42,36 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - Data Handling
-    func fetchData() {
+    private func fetchData() {
         mainView.startAnimating()
-        viewModel.fetchExchangeRates(with: baseAsset, completion: exchangeRatesHandler)
+        viewModel.fetchExchangeRates()
     }
     
-    lazy var exchangeRatesHandler: ExchangeRatesCompletionBlock = { [weak self] response in
+    private func subscribeData() {
+        viewModel.subscribeExchangeRates(completion: exchangeRatesResponseHandler)
+    }
+    
+    lazy var exchangeRatesResponseHandler: ExchangeRatesResponseBlock = { [weak self] error in
         DispatchQueue.main.async {
-            switch response {
-            case .success(let data):
-                guard let data = data else { return }
-                self?.exchangeRates = data.rates
-            case .failure(let error):
-                let errorResponse = error as? ErrorResponse
-                self?.showAlert(title: "Error", message: errorResponse?.errorMessage)
-            }
-            self?.mainTableView.reloadData()
-            self?.mainView.stopAnimating()
+            self?.mainView.reloadData()
+            guard let error = error else { return }
+            self?.showAlert(title: "Error", message: error.errorMessage)
         }
     }
     
+}
+
+extension MainViewController: MainViewDataProtocol {
+    func getNumberOfRowsInSection() -> Int {
+        return viewModel.exchangeRates.count
+    }
+    
+    func getCellData(at index: Int) -> Rate {
+        return viewModel.exchangeRates[index]
+    }
+    
+    func selectBaseAsset(at row: Int) {
+        viewModel.baseAsset = BaseAsset.allCases[row]
+        fetchData()
+    }
 }
